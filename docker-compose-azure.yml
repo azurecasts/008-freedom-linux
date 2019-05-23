@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  www:
+    image: robconery/009-elixir
+    restart: always
+    environment:
+      - REDIS_URL=redis://redis:6379/10
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
